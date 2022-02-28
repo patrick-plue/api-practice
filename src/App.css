@@ -13,10 +13,17 @@ body {
   max-width: 1200px;
 }
 
+.navbarContainer {
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+}
+
 .navbar {
   background-color: orangered;
   display: flex;
   justify-content: space-between;
+  width: 80%;
 }
 
 .results {
