@@ -8,13 +8,14 @@ function Results({ data, searchedData }) {
       {data &&
         data.map((e, index) => (
           <p className="resultElement" key={index}>
-            {e.title} <br /> {e.author} <br /> {e.url}
+            {e.title} <a href={e.url}>{e.url}</a>
+            <br /> {e.author} <br />
           </p>
         ))}
       {!data && (
         <div className="loadingContainer">
           <p id="loadingElement">
-            Loading.... <AiOutlineLoading3Quarters />{' '}
+            Loading.... <AiOutlineLoading3Quarters />
           </p>
         </div>
       )}

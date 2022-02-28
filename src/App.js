@@ -8,7 +8,8 @@ function App() {
   const [data, setData] = useState();
   const [searchedData, setSearchedData] = useState({});
 
-  const api = 'http://hn.algolia.com/api/v1/search?query=foo&tags=story';
+  const api = 'http://hn.algolia.com/api/v1/search_by_date?tags=story';
+  // const searchApi = `http://hn.algolia.com/api/v1/search?query=...`
 
   useEffect(() => {
     fetch(api)
@@ -27,18 +28,28 @@ function App() {
       });
   }, []);
 
-  // const search = ({ target }) => {
-  //   const input = target.value;
-  //   const dataList = data.map((e) => e);
-  //   const results = dataList.filter((e) => e.title.includes(input));
-  //   console.log(results);
-  //   setData(results);
-  // };
+  const search = ({ target, event }) => {
+    const input = target.value;
+    fetch(`http://hn.algolia.com/api/v1/search?query=${input}`)
+      .then(
+        (response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error('Request failed!');
+        },
+        (networkError) => console.log(networkError.message)
+      )
+      .then((jsonResponse) => {
+        console.log(jsonResponse);
+        setData(jsonResponse.hits);
+      });
+  };
 
   return (
     <>
       <div className="mainContainer">
-        <Navbar />
+        <Navbar search={search} />
         <Results data={data} />
         <Footer />
       </div>
