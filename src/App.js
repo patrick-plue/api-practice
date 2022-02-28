@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import mock from './hackernews.json';
+import Navbar from './Navbar';
+import Results from './Results';
+import Footer from './Footer';
 
 function App() {
+  const [data, setData] = useState(mock.hits);
+  const [searchedData, setSearchedData] = useState({});
+
+  const search = ({ target }) => {
+    const input = target.value;
+    const dataList = data.map((e) => e);
+    const results = dataList.filter((e) => e.title.includes(input));
+    console.log(results);
+    setData(results);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="mainContainer">
+        <Navbar search={search} />
+        <Results data={data} searchedData={searchedData} />
+        <Footer />
+      </div>
+    </>
   );
 }
 
