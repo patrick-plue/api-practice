@@ -13,7 +13,7 @@ function Navbar({ search }) {
         <input onChange={search} type="text" id="searchbar" />
       </div>
       <div>
-        <select>
+        <select id="select">
           <option>All</option>
           <option>Story</option>
           <option>Comments</option>

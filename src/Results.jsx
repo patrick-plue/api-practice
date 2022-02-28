@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 function Results({ data, searchedData }) {
   return (
@@ -10,7 +11,11 @@ function Results({ data, searchedData }) {
             {e.title} {e.author} <br /> {e.url}
           </p>
         ))}
-      {!data && <p>Loading....</p>}
+      {!data && (
+        <p>
+          Loading.... <AiOutlineLoading3Quarters />{' '}
+        </p>
+      )}
     </div>
   );
 }
