@@ -22,6 +22,7 @@ function App() {
         (networkError) => console.log(networkError.message)
       )
       .then((jsonResponse) => {
+        console.log(jsonResponse);
         setData(jsonResponse.hits);
       });
   }, []);
