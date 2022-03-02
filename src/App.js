@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import mock from './hackernews.json';
 import Navbar from './Navbar';
 import Results from './Results';
 import Footer from './Footer';
@@ -10,39 +9,15 @@ function App() {
   const [data, setData] = useState();
   const [currentPage, setCurrentPage] = useState(0);
   const [pages, setPages] = useState(0);
+  const [topic, setTopic] = useState('React');
   console.log(currentPage);
+  console.log(topic);
 
-  const startURL = 'http://hn.algolia.com/api/v1/search?tags=front_page';
+  //UseEffects
 
-  // const queryParams = "";
-  // const searchApi = `http://hn.algolia.com/api/v1/search?query=...`
-
-  // UseEffects
   useEffect(() => {
-    fetch(startURL)
-      .then(
-        (response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error('Request failed!');
-        },
-        (networkError) => console.log(networkError.message)
-      )
-      .then((jsonResponse) => {
-        console.log(jsonResponse);
-        setData(jsonResponse.hits);
-        setPages(jsonResponse.nbPages);
-      });
-  }, []);
-
-  //Functions
-
-  const search = ({ target, event }) => {
-    const input = target.value;
-    //search for page 2- implement pagination
     fetch(
-      `http://hn.algolia.com/api/v1/search?query=${input}/&page=${currentPage}`
+      `http://hn.algolia.com/api/v1/search?query=${topic}/&page=${currentPage}`
     )
       .then(
         (response) => {
@@ -56,24 +31,36 @@ function App() {
       .then((jsonResponse) => {
         setData(jsonResponse.hits);
         setPages(jsonResponse.nbPages);
-        console.log(jsonResponse);
       });
-  };
+  }, [topic, currentPage]);
 
   const changePage = (n) => {
     setCurrentPage(n);
   };
 
+  const changeTopic = (topic) => {
+    setTopic(topic);
+    setCurrentPage(0);
+  };
+
+  //dynamically render button component depending on number of pages
   let buttonArray = [];
 
-  for (let i = 1; i <= pages; i++) {
-    buttonArray.push(<PageButtons number={i} changePage={changePage} />);
+  for (let i = 0; i < pages; i++) {
+    buttonArray.push(
+      <PageButtons
+        key={i}
+        number={i}
+        changePage={changePage}
+        currentPage={currentPage}
+      />
+    );
   }
 
   return (
     <>
       <div className="mainContainer">
-        <Navbar search={search} />
+        <Navbar topic={topic} changeTopic={changeTopic} />
         <Results data={data} />
         <div className="buttons">{buttonArray}</div>
         <Footer />

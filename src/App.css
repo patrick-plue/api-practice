@@ -72,6 +72,15 @@ body {
   padding: 5px;
 }
 
+.button:active {
+  color: red;
+}
+
+.active {
+  background-color: rgb(33, 7, 7);
+  color: white;
+}
+
 .button:hover {
   cursor: pointer;
   background-color: beige;
