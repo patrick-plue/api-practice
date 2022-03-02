@@ -7,11 +7,18 @@ function Results({ data, noResults }) {
     <div className="results">
       {data &&
         data.map((e, index) => (
-          <p className="resultElement" key={index}>
-            {e.title} <a href={e.url}>{e.url}</a>
-            <br /> {e.author} <br />
-            {e.created_at}
-          </p>
+          <div className="resultElement" key={index}>
+            <div className="resultTitle">
+              <p className="resultTitleElement">{e.title} </p>
+              <a className="resultTitleLink" href={e.url}>
+                {e.url}
+              </a>
+            </div>
+            <div className="resultFooter">
+              <p> {e.author}</p>
+              <p>{e.created_at}</p>
+            </div>
+          </div>
         ))}
       {!data && (
         <div className="loadingContainer">

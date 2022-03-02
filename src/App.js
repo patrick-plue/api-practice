@@ -12,6 +12,7 @@ function App() {
   const [topic, setTopic] = useState('React');
   const [noResults, setNoResults] = useState(false);
   const [buttons, setButtons] = useState([]);
+  console.log(currentPage);
 
   //UseEffects
 
@@ -43,12 +44,12 @@ function App() {
   let buttonArray = [];
 
   useEffect(() => {
-    for (let i = currentPage - 3; i < currentPage + 2; i++) {
-      if (i >= 0 && i < pages - 2) {
+    for (let i = currentPage - 4; i < currentPage + 4; i++) {
+      if (i >= 0 && i < pages - 3) {
         buttonArray.push(
           <PageButtons
             key={i}
-            number={i + 1}
+            number={i + 2}
             changePage={changePage}
             currentPage={currentPage}
           />
@@ -56,7 +57,7 @@ function App() {
       }
     }
     setButtons(buttonArray);
-  }, [pages, currentPage, buttonArray]);
+  }, [pages, currentPage]);
 
   //Functions
 
@@ -80,14 +81,16 @@ function App() {
             onClick={() => changePage(0)}
             className={currentPage === 0 ? 'button active' : 'button'}
           >
-            first page
+            1
           </button>
+          <p className="dots">...</p>
           {buttons.map((e) => e)}
+          <p className="dots">...</p>
           <button
             onClick={() => changePage(pages - 1)}
             className={currentPage === pages - 1 ? 'button active' : 'button'}
           >
-            last page{' '}
+            {pages - 1}
           </button>
         </div>
         <Footer />
