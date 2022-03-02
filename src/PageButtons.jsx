@@ -5,8 +5,8 @@ function PageButtons({ number, changePage, currentPage }) {
   return (
     <div>
       <button
-        className={number === currentPage ? 'button active' : 'button'}
-        onClick={() => changePage(number)}
+        className={number - 1 === currentPage ? 'button active' : 'button'}
+        onClick={() => changePage(number - 1)}
       >
         {number}
       </button>

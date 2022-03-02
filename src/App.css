@@ -1,7 +1,9 @@
 * {
   box-sizing: border-box;
-  background-color: rgb(248, 248, 247);
   font-size: 14px;
+  margin: 0px;
+  padding: 0px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
@@ -12,6 +14,7 @@ body {
 .mainContainer {
   margin: 20px;
   width: 900px;
+  background-color: #f6f6ef;
 }
 
 .navbarContainer {
@@ -43,12 +46,39 @@ body {
 .results {
   display: flex;
   flex-direction: column;
+  background-color: rgb(243, 240, 237);
+  margin: 0 5px;
 }
 
 .resultElement {
-  background-color: rgb(243, 240, 237);
-  padding: 20px;
-  margin: 0px;
+  padding: 5px;
+  margin: 0px 0px;
+}
+
+.resultTitle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.resultTitleElement {
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.resultTitleLink {
+  font-size: 0.8rem;
+  color: #696969;
+  text-decoration: none;
+  margin-left: 2px;
+  display: flex;
+}
+
+.resultFooter {
+  display: flex;
+  gap: 3px;
+  font-size: 0.75rem;
+  color: #696969;
 }
 
 .loadingContainer {
@@ -107,4 +137,8 @@ body {
 
 .footer li:first-child {
   list-style-type: none;
+}
+
+.dots {
+  align-self: flex-end;
 }
