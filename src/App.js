@@ -44,11 +44,11 @@ function App() {
 
   useEffect(() => {
     for (let i = currentPage - 3; i < currentPage + 2; i++) {
-      if (i >= 1 && i < pages - 1) {
+      if (i >= 0 && i < pages - 2) {
         buttonArray.push(
           <PageButtons
             key={i}
-            number={i}
+            number={i + 1}
             changePage={changePage}
             currentPage={currentPage}
           />
@@ -56,7 +56,7 @@ function App() {
       }
     }
     setButtons(buttonArray);
-  }, [currentPage]);
+  }, [pages, currentPage, buttonArray]);
 
   //Functions
 
@@ -76,9 +76,19 @@ function App() {
         <Results data={data} noResults={noResults} />
 
         <div className="buttons">
-          <button onClick={() => changePage(0)}>first page</button>
+          <button
+            onClick={() => changePage(0)}
+            className={currentPage === 0 ? 'button active' : 'button'}
+          >
+            first page
+          </button>
           {buttons.map((e) => e)}
-          <button onClick={() => changePage(pages - 1)}>last page </button>
+          <button
+            onClick={() => changePage(pages - 1)}
+            className={currentPage === pages - 1 ? 'button active' : 'button'}
+          >
+            last page{' '}
+          </button>
         </div>
         <Footer />
       </div>
