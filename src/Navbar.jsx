@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineSetting } from 'react-icons/ai';
 
-function Navbar({ changeTopic }) {
+function Navbar({ changeTopic, topic }) {
   return (
     <div className="navbarContainer">
       <div className="navbar">
@@ -18,16 +18,10 @@ function Navbar({ changeTopic }) {
           onChange={(e) => changeTopic(e.target.value)}
           type="text"
           id="searchbar"
+          value={topic}
         />
         <AiOutlineSetting />
         <p>Settings</p>
-      </div>
-      <div>
-        <select id="select">
-          <option>All</option>
-          <option>Story</option>
-          <option>Comments</option>
-        </select>
       </div>
     </div>
   );

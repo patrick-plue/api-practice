@@ -2,9 +2,7 @@ import React from 'react';
 import './App.css';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
-function Results({ data, searchedData }) {
-  const timeStamp = new Date().getTime() / 1000;
-
+function Results({ data, noResults }) {
   return (
     <div className="results">
       {data &&
@@ -20,6 +18,11 @@ function Results({ data, searchedData }) {
           <p id="loadingElement">
             Loading.... <AiOutlineLoading3Quarters />
           </p>
+        </div>
+      )}
+      {noResults && (
+        <div className="resultElement">
+          <p>Nothing found</p>
         </div>
       )}
     </div>
