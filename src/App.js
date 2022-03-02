@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import mock from './hackernews.json';
+// import mock from './hackernews.json';
 import Navbar from './Navbar';
 import Results from './Results';
 import Footer from './Footer';
+import PageButtons from './PageButtons';
 
 function App() {
+  // States
   const [data, setData] = useState();
-  const [searchedData, setSearchedData] = useState({});
+  const [currentPage, setCurrentPage] = useState(0);
+  const [pages, setPages] = useState(0);
+  console.log(currentPage);
 
-  const api = 'http://hn.algolia.com/api/v1/search_by_date?tags=story';
+  const startURL = 'http://hn.algolia.com/api/v1/search?tags=front_page';
+
+  // const queryParams = "";
   // const searchApi = `http://hn.algolia.com/api/v1/search?query=...`
 
+  // UseEffects
   useEffect(() => {
-    fetch(api)
+    fetch(startURL)
       .then(
         (response) => {
           if (response.ok) {
@@ -25,12 +32,18 @@ function App() {
       .then((jsonResponse) => {
         console.log(jsonResponse);
         setData(jsonResponse.hits);
+        setPages(jsonResponse.nbPages);
       });
   }, []);
 
+  //Functions
+
   const search = ({ target, event }) => {
     const input = target.value;
-    fetch(`http://hn.algolia.com/api/v1/search?query=${input}`)
+    //search for page 2- implement pagination
+    fetch(
+      `http://hn.algolia.com/api/v1/search?query=${input}/&page=${currentPage}`
+    )
       .then(
         (response) => {
           if (response.ok) {
@@ -41,16 +54,28 @@ function App() {
         (networkError) => console.log(networkError.message)
       )
       .then((jsonResponse) => {
-        console.log(jsonResponse);
         setData(jsonResponse.hits);
+        setPages(jsonResponse.nbPages);
+        console.log(jsonResponse);
       });
   };
+
+  const changePage = (n) => {
+    setCurrentPage(n);
+  };
+
+  let buttonArray = [];
+
+  for (let i = 1; i <= pages; i++) {
+    buttonArray.push(<PageButtons number={i} changePage={changePage} />);
+  }
 
   return (
     <>
       <div className="mainContainer">
         <Navbar search={search} />
         <Results data={data} />
+        <div className="buttons">{buttonArray}</div>
         <Footer />
       </div>
     </>

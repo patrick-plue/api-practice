@@ -67,6 +67,24 @@ body {
   background-color: #ff742b;
 }
 
+.button {
+  border: 1px dashed gainsboro;
+  padding: 5px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: beige;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
 .footer {
   display: flex;
   margin: 0 30px;

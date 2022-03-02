@@ -3,6 +3,8 @@ import './App.css';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 function Results({ data, searchedData }) {
+  const timeStamp = new Date().getTime() / 1000;
+
   return (
     <div className="results">
       {data &&
@@ -10,6 +12,7 @@ function Results({ data, searchedData }) {
           <p className="resultElement" key={index}>
             {e.title} <a href={e.url}>{e.url}</a>
             <br /> {e.author} <br />
+            {e.created_at}
           </p>
         ))}
       {!data && (
