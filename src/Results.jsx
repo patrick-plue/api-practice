@@ -3,18 +3,22 @@ import './App.css';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 function Results({ data, searchedData }) {
+  const timeStamp = new Date().getTime() / 1000;
+
   return (
     <div className="results">
       {data &&
         data.map((e, index) => (
           <p className="resultElement" key={index}>
-            {e.title} <br /> {e.author} <br /> {e.url}
+            {e.title} <a href={e.url}>{e.url}</a>
+            <br /> {e.author} <br />
+            {e.created_at}
           </p>
         ))}
       {!data && (
         <div className="loadingContainer">
           <p id="loadingElement">
-            Loading.... <AiOutlineLoading3Quarters />{' '}
+            Loading.... <AiOutlineLoading3Quarters />
           </p>
         </div>
       )}

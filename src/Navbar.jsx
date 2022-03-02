@@ -1,20 +1,25 @@
 import React from 'react';
-import './App.css';
+import { AiOutlineSetting } from 'react-icons/ai';
 
-function Navbar({ search }) {
+function Navbar({ changeTopic }) {
   return (
     <div className="navbarContainer">
       <div className="navbar">
         <img
           id="icon"
-          src="https://images.unsplash.com/photo-1593882100241-aef1449fe351?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80"
+          src="https://d1sz9gun5ag95e.cloudfront.net/packs/media/images/logo-hn-search-a822432b.png"
           alt="icon"
         />
         <p>
           Search <br />
           Hacker News
         </p>
-        <input onChange={search} type="text" id="searchbar" />
+        <input
+          onChange={(e) => changeTopic(e.target.value)}
+          type="text"
+          id="searchbar"
+        />
+        <AiOutlineSetting />
         <p>Settings</p>
       </div>
       <div>

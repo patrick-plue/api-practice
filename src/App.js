@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import mock from './hackernews.json';
 import Navbar from './Navbar';
 import Results from './Results';
 import Footer from './Footer';
+import PageButtons from './PageButtons';
 
 function App() {
+  // States
   const [data, setData] = useState();
-  const [searchedData, setSearchedData] = useState({});
+  const [currentPage, setCurrentPage] = useState(0);
+  const [pages, setPages] = useState(0);
+  const [topic, setTopic] = useState('React');
+  console.log(currentPage);
+  console.log(topic);
 
-  const api = 'http://hn.algolia.com/api/v1/search?query=foo&tags=story';
+  //UseEffects
 
   useEffect(() => {
-    fetch(api)
+    fetch(
+      `http://hn.algolia.com/api/v1/search?query=${topic}/&page=${currentPage}`
+    )
       .then(
         (response) => {
           if (response.ok) {
@@ -22,24 +29,40 @@ function App() {
         (networkError) => console.log(networkError.message)
       )
       .then((jsonResponse) => {
-        console.log(jsonResponse);
         setData(jsonResponse.hits);
+        setPages(jsonResponse.nbPages);
       });
-  }, []);
+  }, [topic, currentPage]);
 
-  // const search = ({ target }) => {
-  //   const input = target.value;
-  //   const dataList = data.map((e) => e);
-  //   const results = dataList.filter((e) => e.title.includes(input));
-  //   console.log(results);
-  //   setData(results);
-  // };
+  const changePage = (n) => {
+    setCurrentPage(n);
+  };
+
+  const changeTopic = (topic) => {
+    setTopic(topic);
+    setCurrentPage(0);
+  };
+
+  //dynamically render button component depending on number of pages
+  let buttonArray = [];
+
+  for (let i = 0; i < pages; i++) {
+    buttonArray.push(
+      <PageButtons
+        key={i}
+        number={i}
+        changePage={changePage}
+        currentPage={currentPage}
+      />
+    );
+  }
 
   return (
     <>
       <div className="mainContainer">
-        <Navbar />
+        <Navbar topic={topic} changeTopic={changeTopic} />
         <Results data={data} />
+        <div className="buttons">{buttonArray}</div>
         <Footer />
       </div>
     </>
