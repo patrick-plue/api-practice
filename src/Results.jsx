@@ -15,8 +15,10 @@ function Results({ data, noResults }) {
               </a>
             </div>
             <div className="resultFooter">
-              <p> {e.author}</p>
-              <p>{e.created_at}</p>
+              <p>{e.points} points |</p>
+              <p> {e.author} |</p>
+              <p>{new Date(e.created_at).toLocaleString()} |</p>
+              <p>{e.num_comments} comments</p>
             </div>
           </div>
         ))}

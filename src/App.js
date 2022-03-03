@@ -7,12 +7,12 @@ import PageButtons from './PageButtons';
 function App() {
   // States
   const [data, setData] = useState();
+  const [metaData, setMetaData] = useState();
   const [currentPage, setCurrentPage] = useState(0);
   const [pages, setPages] = useState(0);
   const [topic, setTopic] = useState('React');
   const [noResults, setNoResults] = useState(false);
   const [buttons, setButtons] = useState([]);
-  console.log(currentPage);
 
   //UseEffects
 
@@ -32,6 +32,7 @@ function App() {
       .then((jsonResponse) => {
         setData(jsonResponse.hits);
         setPages(jsonResponse.nbPages);
+        setMetaData(jsonResponse);
         if (jsonResponse.hits.length < 1) {
           setNoResults(true);
         } else {
@@ -73,9 +74,8 @@ function App() {
   return (
     <>
       <div className="mainContainer">
-        <Navbar topic={topic} changeTopic={changeTopic} />
+        <Navbar topic={topic} changeTopic={changeTopic} metaData={metaData} />
         <Results data={data} noResults={noResults} />
-
         <div className="buttons">
           <button
             onClick={() => changePage(0)}
@@ -83,18 +83,19 @@ function App() {
           >
             1
           </button>
-          <p className="dots">...</p>
           {buttons.map((e) => e)}
-          <p className="dots">...</p>
-          <button
-            onClick={() => changePage(pages - 1)}
-            className={currentPage === pages - 1 ? 'button active' : 'button'}
-          >
-            {pages - 1}
-          </button>
+          {!noResults && (
+            <button
+              onClick={() => changePage(pages - 1)}
+              className={currentPage === pages - 1 ? 'button active' : 'button'}
+            >
+              {pages - 1}
+            </button>
+          )}
         </div>
-        <Footer />
       </div>
+
+      <Footer />
     </>
   );
 }
