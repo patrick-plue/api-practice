@@ -12,13 +12,13 @@ body {
 }
 
 .mainContainer {
-  margin: 20px;
-  width: 900px;
+  margin: 0 20px;
+  width: clamp(15px, 90vw, 1300px);
   background-color: #f6f6ef;
 }
 
 .navbarContainer {
-  width: 900px;
+  width: clamp(15px, 90vw, 1300px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,23 +30,76 @@ body {
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  padding: 5px;
 }
 
 #searchbar {
-  width: 70%;
-  height: 2rem;
-  background-color: aliceblue;
+  height: 42px;
+  width: 80%;
+  background-color: white;
+  border: none;
+  margin-left: 10px;
+}
+
+#searchInput {
+  background-color: white;
+  width: 65%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+input:focus {
+  outline: none;
+}
+
+#glass {
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+#gearIcon {
+  font-size: 2.2rem;
+}
+
+#inputText {
+  font-size: 0.7rem;
 }
 
 .navbar p {
+  font-size: 18px;
+  font-weight: 500;
+
+  flex-wrap: wrap-reverse;
+}
+
+.subNavbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.selectContainer {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
   margin-left: 5px;
-  margin-right: 5px;
+  gap: 8px;
+  align-content: center;
+  vertical-align: text-bottom;
+}
+
+.resultContainer {
+  margin-right: 15px;
+  display: flex;
+  gap: 0.2rem;
 }
 
 .results {
   display: flex;
   flex-direction: column;
-  background-color: rgb(243, 240, 237);
+  background-color: #f6f6ef;
   margin: 0 5px;
 }
 
@@ -92,14 +145,16 @@ body {
 }
 
 #icon {
-  width: 50px;
+  width: 48px;
   margin-left: 10px;
   background-color: #ff742b;
 }
 
 .button {
-  border: 1px dashed gainsboro;
-  padding: 5px;
+  border: 1px solid;
+  padding: 5px 10px;
+  background-color: #f6f6ef;
+  font-size: 0.8rem;
 }
 
 .button:active {
@@ -126,7 +181,7 @@ body {
 
 .footer {
   display: flex;
-  margin: 0 30px;
+  margin: 25px 30px;
   justify-content: center;
 }
 
@@ -139,6 +194,6 @@ body {
   list-style-type: none;
 }
 
-.dots {
-  align-self: flex-end;
+.reactIcon {
+  font-size: 1.5rem;
 }
