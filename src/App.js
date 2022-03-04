@@ -43,7 +43,7 @@ function App() {
               setNoResults(false);
             }
           }),
-      100
+      200
     );
   }, [topic, currentPage]);
 
