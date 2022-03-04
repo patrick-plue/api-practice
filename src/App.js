@@ -19,7 +19,7 @@ function App() {
   //UseEffects
 
   useEffect(() => {
-    setTimeout(
+    const timer = setTimeout(
       () =>
         fetch(
           `http://hn.algolia.com/api/v1/search?query=${topic}/&page=${currentPage}`
@@ -45,13 +45,14 @@ function App() {
           }),
       200
     );
+    return () => clearTimeout(timer);
   }, [topic, currentPage]);
 
   //dynamically render button component depending on number of pages
   let buttonArray = [];
 
   useEffect(() => {
-    for (let i = currentPage - 4; i < currentPage + 4; i++) {
+    for (let i = currentPage - 3; i < currentPage + 3; i++) {
       if (i >= 0 && i < pages - 3) {
         buttonArray.push(
           <PageButtons
@@ -90,7 +91,7 @@ function App() {
             1
           </button>
           {buttons.map((e) => e)}
-          {!noResults && (
+          {!noResults && data && (
             <button
               onClick={() => changePage(pages - 1)}
               className={currentPage === pages - 1 ? 'button active' : 'button'}
