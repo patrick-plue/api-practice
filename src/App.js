@@ -14,31 +14,37 @@ function App() {
   const [noResults, setNoResults] = useState(false);
   const [buttons, setButtons] = useState([]);
 
+  console.log(currentPage);
+
   //UseEffects
 
   useEffect(() => {
-    fetch(
-      `http://hn.algolia.com/api/v1/search?query=${topic}/&page=${currentPage}`
-    )
-      .then(
-        (response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error('Request failed!');
-        },
-        (networkError) => console.log(networkError.message)
-      )
-      .then((jsonResponse) => {
-        setData(jsonResponse.hits);
-        setPages(jsonResponse.nbPages);
-        setMetaData(jsonResponse);
-        if (jsonResponse.hits.length < 1) {
-          setNoResults(true);
-        } else {
-          setNoResults(false);
-        }
-      });
+    setTimeout(
+      () =>
+        fetch(
+          `http://hn.algolia.com/api/v1/search?query=${topic}/&page=${currentPage}`
+        )
+          .then(
+            (response) => {
+              if (response.ok) {
+                return response.json();
+              }
+              throw new Error('Request failed!');
+            },
+            (networkError) => console.log(networkError.message)
+          )
+          .then((jsonResponse) => {
+            setData(jsonResponse.hits);
+            setPages(jsonResponse.nbPages);
+            setMetaData(jsonResponse);
+            if (jsonResponse.hits.length < 1) {
+              setNoResults(true);
+            } else {
+              setNoResults(false);
+            }
+          }),
+      100
+    );
   }, [topic, currentPage]);
 
   //dynamically render button component depending on number of pages

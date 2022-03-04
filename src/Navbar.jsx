@@ -3,7 +3,6 @@ import { AiOutlineSetting } from 'react-icons/ai';
 import { GiMagnifyingGlass } from 'react-icons/gi';
 
 function Navbar({ changeTopic, topic, metaData }) {
-  console.log(metaData);
   return (
     <div className="navbarContainer">
       <div className="navbar">

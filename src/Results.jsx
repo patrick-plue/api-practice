@@ -31,7 +31,7 @@ function Results({ data, noResults }) {
       )}
       {noResults && (
         <div className="resultElement">
-          <p>Nothing found</p>
+          <p>No Results</p>
         </div>
       )}
     </div>
